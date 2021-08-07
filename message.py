@@ -7,7 +7,7 @@ client = Client(account_sid, auth_token)
 def automate_message():  
     message = client.messages.create( 
                                 from_='whatsapp:+14155238886',  
-                                body='Good Morning Rahul... Get Up it's 5 O' Clock',      
+                                body='Good Morning Rahul... Please take glass of warm water',      
                                 to='whatsapp:+916205192178' 
                             ) 
     
