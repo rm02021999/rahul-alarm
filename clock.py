@@ -1,7 +1,6 @@
 from datetime import datetime
 from apscheduler.schedulers.blocking import BlockingScheduler
 from os import environ
-from flask import Flask
 from twilio.rest import Client 
 
 sched = BlockingScheduler()
