@@ -1,11 +1,24 @@
 from datetime import datetime
 from apscheduler.schedulers.blocking import BlockingScheduler
-from message import automate_message
+from os import environ
+from flask import Flask
+from twilio.rest import Client 
 
 sched = BlockingScheduler()
+account_sid = 'AC5e7d9b0bdf266ba786913630b8a0d8d4' 
+auth_token = '201b9f8460882601cda85667d0427202'
+client = Client(account_sid, auth_token) 
 
-#sched.add_job(automate_message,'interval',hour=2)      # if you want to send send message in every 2 hours 
-#sched.add_job(automate_message, 'date', run_date='2021-07-31 21:40:00')     # if you want to send send message at specific date and time
-sched.add_job(automate_message,'cron',day_of_week='mon-sun',hour=2)
+@sched.scheduled_job('cron', day_of_week='mon-sun',secoonds=55, timezone='Asia/Kolkata')
+def automate_message():
+    message = client.messages.create( 
+                                from_='whatsapp:+14155238886',  
+                                body='Good Morning Rahul... Please take glass of warm water',      
+                                to='whatsapp:+916205192178' 
+                            ) 
+    
+    print(message.sid)()
 
 sched.start()
+
+
